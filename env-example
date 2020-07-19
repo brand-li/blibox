@@ -49,7 +49,7 @@ DOCKER_LOGS=0
 
 
 ###
-### Relative or absolute path to the blibox repository.
+### Relative or absolute path to the devilbox repository.
 ### (Used as a prefix for all mount paths)
 ### There is no need to change this.
 ###
@@ -172,7 +172,7 @@ DNS_CHECK_TIMEOUT=1
 ### This has nothing to do for SSL certificates for projects, it is just for the intranet
 ### itself.
 ###
-BLIBOX_UI_SSL_CN=localhost,*.localhost,blibox,*.blibox,httpd
+BLIBOX_UI_SSL_CN=localhost,*.localhost,devilbox,*.devilbox,httpd
 
 
 ###
@@ -200,7 +200,7 @@ BLIBOX_UI_PROTECT=0
 ###   BLIBOX_UI_PASSWORD=my-very-secure-password
 ###   BLIBOX_UI_PASSWORD=Some pass with spaces
 ###
-### The default username is 'blibox'
+### The default username is 'devilbox'
 ###
 BLIBOX_UI_PASSWORD=password
 
@@ -263,9 +263,9 @@ BLIBOX_VENDOR_PHPPGADMIN_AUTOLOGIN=1
 #PHP_SERVER=7.0
 #PHP_SERVER=7.1
 #PHP_SERVER=7.2
-PHP_SERVER=7.3
+#PHP_SERVER=7.3
 #PHP_SERVER=7.4
-#PHP_SERVER=8.0
+PHP_SERVER=8.0
 
 
 ###
@@ -273,8 +273,8 @@ PHP_SERVER=7.3
 ###
 #HTTPD_SERVER=apache-2.2
 #HTTPD_SERVER=apache-2.4
-HTTPD_SERVER=nginx-stable
-#HTTPD_SERVER=nginx-mainline
+#HTTPD_SERVER=nginx-stable
+HTTPD_SERVER=nginx-mainline
 
 
 ###
@@ -288,8 +288,8 @@ HTTPD_SERVER=nginx-stable
 #MYSQL_SERVER=mariadb-10.0
 #MYSQL_SERVER=mariadb-10.1
 #MYSQL_SERVER=mariadb-10.2
-MYSQL_SERVER=mariadb-10.3
-#MYSQL_SERVER=mariadb-10.4
+#MYSQL_SERVER=mariadb-10.3
+MYSQL_SERVER=mariadb-10.4
 #MYSQL_SERVER=percona-5.5
 #MYSQL_SERVER=percona-5.6
 #MYSQL_SERVER=percona-5.7
@@ -352,9 +352,9 @@ MYSQL_SERVER=mariadb-10.3
 #PGSQL_SERVER=11.6-alpine
 #PGSQL_SERVER=12.0
 #PGSQL_SERVER=12.0-alpine
-PGSQL_SERVER=12.1
+#PGSQL_SERVER=12.1
 #PGSQL_SERVER=12.1-alpine
-#PGSQL_SERVER=latest
+PGSQL_SERVER=latest
 #PGSQL_SERVER=alpine
 
 
@@ -371,9 +371,9 @@ PGSQL_SERVER=12.1
 #REDIS_SERVER=3.2-alpine
 #REDIS_SERVER=4.0
 #REDIS_SERVER=4.0-alpine
-REDIS_SERVER=5.0
+#REDIS_SERVER=5.0
 #REDIS_SERVER=5.0-alpine
-#REDIS_SERVER=latest
+REDIS_SERVER=latest
 #REDIS_SERVER=alpine
 
 
@@ -385,9 +385,9 @@ REDIS_SERVER=5.0
 ###
 #MEMCD_SERVER=1.4
 #MEMCD_SERVER=1.4-alpine
-MEMCD_SERVER=1.5
+#MEMCD_SERVER=1.5
 #MEMCD_SERVER=1.5-alpine
-#MEMCD_SERVER=latest
+MEMCD_SERVER=latest
 #MEMCD_SERVER=alpine
 
 
@@ -400,8 +400,8 @@ MEMCD_SERVER=1.5
 #MONGO_SERVER=3.4
 #MONGO_SERVER=3.6
 #MONGO_SERVER=4.0
-MONGO_SERVER=4.2
-#MONGO_SERVER=latest
+#MONGO_SERVER=4.2
+MONGO_SERVER=latest
 
 
 
@@ -444,7 +444,7 @@ HOST_PATH_HTTPD_DATADIR=./data/www
 
 ###
 ### The path on your host OS of the ssh directory to be mounted into the
-### PHP container into /home/blibox/.ssh.
+### PHP container into /home/devilbox/.ssh.
 ###
 ### IMPORTANT: The path is mounted read-only to ensure you cannot accidentally
 ##             delete anything inside the php container.
@@ -489,7 +489,7 @@ PHP_MODULES_DISABLE=oci8,PDO_OCI,pdo_sqlsrv,sqlsrv,rdkafka,swoole
 ### and define a couple of 'postconf -e name=value' commands.
 ###
 ### When set to '2' (email catch-all), no mail will leave the Blibox. It is automatically
-### internally routed the the blibox mail account and you can see each sent mail
+### internally routed the the devilbox mail account and you can see each sent mail
 ### in the bundled intranet: https://localhost/mail.php
 ###
 ### Values:
@@ -516,8 +516,8 @@ PHP_MAIL_CATCH_ALL=2
 ###
 ### Expose HTTPD Port to Host
 ###
-HOST_PORT_HTTPD=80
-HOST_PORT_HTTPD_SSL=443
+HOST_PORT_HTTPD=82
+HOST_PORT_HTTPD_SSL=446
 
 
 ###
@@ -526,7 +526,7 @@ HOST_PORT_HTTPD_SSL=443
 ### By default each project will have two vhosts (one for HTTP and one for HTTPS).
 ### You can control the SSL settings for your projects via the below stated values.
 ###
-### This is internally achieved via the '-m' argument of https://github.com/blibox/vhost-gen
+### This is internally achieved via the '-m' argument of https://github.com/devilbox/vhost-gen
 ###
 ### Values:
 ###   * both:  Serve HTTP and HTTPS for all projects
@@ -543,7 +543,7 @@ HTTPD_VHOST_SSL_TYPE=both
 ### In your project directory, which subfolder should
 ### serve your files?
 ###
-### When changing this value, restart the blibox.
+### When changing this value, restart the devilbox.
 ###
 HTTPD_DOCROOT_DIR=htdocs
 
@@ -554,9 +554,9 @@ HTTPD_DOCROOT_DIR=htdocs
 ### In your project directory, which subfolder should
 ### hold apache, nginx templates for a customized vhost?
 ###
-### When changing this value, restart the blibox.
+### When changing this value, restart the devilbox.
 ###
-HTTPD_TEMPLATE_DIR=.blibox
+HTTPD_TEMPLATE_DIR=.devilbox
 
 
 ###
@@ -601,7 +601,7 @@ HTTPD_NGINX_WORKER_CONNECTIONS=1024
 ### the MySQL root user password will not actually be changed and the Blibox intranet
 ### won't be able to connect to the MySQL service.
 ###
-MYSQL_ROOT_PASSWORD=
+MYSQL_ROOT_PASSWORD=f@st3rNOUmemoMAN
 
 
 ###
@@ -776,3 +776,587 @@ BIND_LOG_DNS_QUERIES=0
 ### <?php echo getenv('Foo'); ?> would produce: 'some value'
 ###
 #Foo=some value
+
+
+
+
+################################################################################
+###
+### 12. ELK stack
+###
+################################################################################
+
+# ELK stack general
+# See here for all versions: https://www.docker.elastic.co/
+#ELK_SERVER=6.1.4
+#ELK_SERVER=6.2.4
+#ELK_SERVER=6.3.2
+#ELK_SERVER=6.4.3
+#ELK_SERVER=6.5.4
+ELK_SERVER=7.8.0
+
+# Elastic Search settings
+HOST_PORT_ELK_ELASTIC=9200
+
+# Logstash settings
+HOST_PORT_ELK_LOGSTASH=9600
+
+# Kibana settings
+HOST_PORT_ELK_KIBANA=5601
+
+
+################################################################################
+###
+### 13. MQTT
+###
+################################################################################
+
+# -----------------------------------------------------------------------------------------------
+# RabbitMQ
+# -----------------------------------------------------------------------------------------------
+# RabbitMQ version to choose
+
+#RABBIT_SERVER=3.6
+#RABBIT_SERVER=3.6-management
+#RABBIT_SERVER=3.7
+#RABBIT_SERVER=3.7-management
+RABBIT_SERVER=latest
+#RABBIT_SERVER=management
+
+RABBIT_DEFAULT_VHOST=my_vhost
+RABBIT_DEFAULT_USER=guest
+RABBIT_DEFAULT_PASS=guest
+
+HOST_PORT_RABBIT=5672
+HOST_PORT_RABBIT_MGMT=15672
+
+
+################################################################################
+###
+### 14. MONITOR
+###
+################################################################################
+
+# -----------------------------------------------------------------------------------------------
+# Monitor
+# -----------------------------------------------------------------------------------------------
+# MONITOR version to choose
+
+#MONITOR_TAG=3.6
+#MONITOR_TAG=3.6-management
+#MONITOR_TAG=3.7
+#MONITOR_TAG=3.7-management
+MONITOR_TAG=latest
+#MONITOR_TAG=management
+
+RABBIT_DEFAULT_VHOST=my_vhost
+RABBIT_DEFAULT_USER=guest
+RABBIT_DEFAULT_PASS=guest
+
+HOST_PORT_RABBIT=5672
+HOST_PORT_RABBIT_MGMT=15672
+
+
+
+################################################################################
+###
+### 15. NOTIFICATIONS
+###
+################################################################################
+
+# -----------------------------------------------------------------------------------------------
+# Alertmanager
+# -----------------------------------------------------------------------------------------------
+
+# Alertmanager version to choose
+
+#ALERTMANAGER_TAG=3.6
+#ALERTMANAGER_TAG=3.6-management
+#ALERTMANAGER_TAG=3.7
+#ALERTMANAGER_TAG=3.7-management
+ALERTMANAGER_TAG=latest
+#ALERTMANAGER_TAG=management
+
+# Alertmanager settings
+
+#ALERTMANAGER_DEFAULT_VHOST=my_vhost
+#ALERTMANAGER_DEFAULT_USER=guest
+#ALERTMANAGER_DEFAULT_PASS=guest
+
+# Alertmanager network settings
+
+HOST_PORT_ALERTMANAGER=9093
+#HOST_PORT_ALERTMANAGER_MGMT=9093
+
+
+
+################################################################################
+###
+### 15. INFLUX Stack TIMESERIES DB'S
+###
+################################################################################
+
+# ------------------------------------------------------------------------------
+# INFLUXDB
+# ------------------------------------------------------------------------------
+
+# INFLUXDB version to choose
+
+INFLUXDB_SERVER=latest
+
+#INFLUXDB_TAG=3.6
+#INFLUXDB_TAG=3.6-management
+#INFLUXDB_TAG=3.7
+#INFLUXDB_TAG=3.7-management
+
+
+# INFLUXDB settings
+
+#INFLUXDB_DEFAULT_VHOST=my_vhost
+#INFLUXDB_DEFAULT_USER=guest
+#INFLUXDB_DEFAULT_PASS=guest
+
+
+# INFLUXDB network settings
+
+HOST_PORT_INFLUXDB=8086
+#HOST_PORT_INFLUXDB_MGMT=8086
+
+
+
+# ------------------------------------------------------------------------------
+# CRONOGRAF
+# ------------------------------------------------------------------------------
+
+
+# CRONOGRAF version to choose
+
+CRONOGRAF_TAG=latest
+
+#CRONOGRAF_TAG=3.6
+#CRONOGRAF_TAG=3.6-management
+#CRONOGRAF_TAG=3.7
+#CRONOGRAF_TAG=3.7-management
+
+
+# CRONOGRAF settings
+
+#CRONOGRAF_DEFAULT_VHOST=my_vhost
+#CRONOGRAF_DEFAULT_USER=guest
+#CRONOGRAF_DEFAULT_PASS=guest
+
+
+# CRONOGRAF network settings
+
+HOST_PORT_CRONOGRAF=8888
+#HOST_PORT_CRONOGRAF_MGMT=1000
+
+
+# ------------------------------------------------------------------------------
+# TELEGRAF
+# ------------------------------------------------------------------------------
+
+# TELEGRAF version to choose
+
+TELEGRAF_TAG=latest
+
+#TELEGRAF_TAG=3.6
+#TELEGRAF_TAG=3.6-management
+#TELEGRAF_TAG=3.7
+#TELEGRAF_TAG=3.7-management
+
+
+# TELEGRAF settings
+
+#TELEGRAF_DEFAULT_VHOST=my_vhost
+#TELEGRAF_DEFAULT_USER=guest
+#TELEGRAF_DEFAULT_PASS=guest
+
+
+# TELEGRAF network settings
+
+HOST_PORT_TELEGRAF=8094
+#HOST_PORT_TELEGRAF_MGMT=1000
+
+
+
+################################################################################
+###
+### 15. GRAFANA Stack --- ( Graf's & Analitycs )
+###
+################################################################################
+
+# ------------------------------------------------------------------------------
+# GRAFANA
+# ------------------------------------------------------------------------------
+
+# GRAFANA version to choose
+
+GRAFANA_TAG=latest
+
+#GRAFANA_TAG=3.6
+#GRAFANA_TAG=3.6-management
+#GRAFANA_TAG=3.7
+#GRAFANA_TAG=3.7-management
+
+
+# GRAFANA settings
+
+#GRAFANA_DEFAULT_VHOST=my_vhost
+#GRAFANA_DEFAULT_USER=guest
+#GRAFANA_DEFAULT_PASS=guest
+
+GF_SECURITY_ADMIN_USER=jadmin
+GF_SECURITY_ADMIN_PASSWORD=f@st3rNOUmemoMAN
+GF_USERS_ALLOW_SIGN_UP=false
+
+GF_INSTALL_PLUGINS=grafana-clock-panel,briangann-gauge-panel,natel-plotly-panel,yesoreyeram-boomtheme-panel,yesoreyeram-boomtable-panel,ryantxu-ajax-panel,marcuscalidus-svg-panel,cloudflare-app,grafana-simple-json-datasource,grafana-influxdb-flux-datasource,doitintl-bigquery-datasource
+
+
+# GRAFANA network settings
+
+HOST_PORT_GRAFANA=3000
+
+
+
+# ------------------------------------------------------------------------------
+# LOKI
+# ------------------------------------------------------------------------------
+
+
+
+################################################################################
+###
+### 15. PROMETHEUS - Metrics and alerting.
+###
+################################################################################
+
+# ------------------------------------------------------------------------------
+# PROMETHEUS
+# ------------------------------------------------------------------------------
+
+# PROMETHEUS version to choose
+
+PROMETHEUS_TAG=latest
+
+#PROMETHEUS_TAG=3.6
+#PROMETHEUS_TAG=3.6-management
+#PROMETHEUS_TAG=3.7
+#PROMETHEUS_TAG=3.7-management
+
+
+# PROMETHEUS settings
+
+#PROMETHEUS_DEFAULT_VHOST=my_vhost
+#PROMETHEUS_DEFAULT_USER=guest
+#PROMETHEUS_DEFAULT_PASS=guest
+
+# PROMETHEUS network settings
+
+HOST_PORT_PROMETHEUS=9090
+
+
+# ------------------------------------------------------------------------------
+# NODEEXPORTER
+# ------------------------------------------------------------------------------
+
+# NODEEXPORTER version to choose
+
+NODEEXPORTER_TAG=latest
+
+#NODEEXPORTER_TAG=3.6
+#NODEEXPORTER_TAG=3.6-management
+#NODEEXPORTER_TAG=3.7
+#NODEEXPORTER_TAG=3.7-management
+
+
+# NODEEXPORTER settings
+
+#NODEEXPORTER_DEFAULT_VHOST=my_vhost
+#NODEEXPORTER_DEFAULT_USER=guest
+#NODEEXPORTER_DEFAULT_PASS=guest
+
+
+# NODEEXPORTER network settings
+
+HOST_PORT_NODEEXPORTER=9100
+
+
+
+# ------------------------------------------------------------------------------
+# CADVISOR
+# ------------------------------------------------------------------------------
+
+# CADVISOR version to choose
+
+CADVISOR_TAG=latest
+
+#CADVISOR_TAG=3.6
+#CADVISOR_TAG=3.6-management
+#CADVISOR_TAG=3.7
+#CADVISOR_TAG=3.7-management
+
+
+# CADVISOR settings
+
+#CADVISOR_DEFAULT_VHOST=my_vhost
+#CADVISOR_DEFAULT_USER=guest
+#CADVISOR_DEFAULT_PASS=guest
+
+# CADVISOR network settings
+
+HOST_PORT_CADVISOR=7900
+
+
+
+# ------------------------------------------------------------------------------
+# PUSHGATEWAY
+# ------------------------------------------------------------------------------
+
+# PUSHGATEWAY version to choose
+
+PUSHGATEWAY_TAG=latest
+
+#PUSHGATEWAY_TAG=3.6
+#PUSHGATEWAY_TAG=3.6-management
+#PUSHGATEWAY_TAG=3.7
+#PUSHGATEWAY_TAG=3.7-management
+
+
+# PUSHGATEWAY settings
+
+#PUSHGATEWAY_DEFAULT_VHOST=my_vhost
+#PUSHGATEWAY_DEFAULT_USER=guest
+#PUSHGATEWAY_DEFAULT_PASS=guest
+
+# PUSHGATEWAY network settings
+
+HOST_PORT_PUSHGATEWAY=9091
+
+
+################################################################################
+###
+### 15. NETWORKING - Proxy's & Load balanceing.
+###
+################################################################################
+
+# ------------------------------------------------------------------------------
+# TRAEFIK
+# ------------------------------------------------------------------------------
+
+# TRAEFIK version to choose
+
+TRAEFIK_TAG=latest
+
+#TRAEFIK_TAG=3.6
+#TRAEFIK_TAG=3.6-management
+#TRAEFIK_TAG=3.7
+#TRAEFIK_TAG=3.7-management
+
+
+# TRAEFIK settings
+
+#TRAEFIK_DEFAULT_VHOST=my_vhost
+#TRAEFIK_DEFAULT_USER=guest
+#TRAEFIK_DEFAULT_PASS=guest
+
+
+# TRAEFIK network settings
+
+HOST_PORT_TRAEFIK=8000
+HOST_PORT_TRAEFIK_DASHBOARD=8080
+
+
+
+
+################################################################################
+
+#ENV_TYPE=prod
+
+# NETWORK=10.0.1.0/28
+# NODERED_IP=10.0.1.2
+# MOSQUITTO_IP=10.0.1.3
+# INFLUXDB_IP=10.0.1.4
+# CHRONOGRAF_IP=10.0.1.5
+# TELEGRAF_IP=10.0.1.6
+# GRAFANA_IP=10.0.1.7
+# NGINX_IP=10.0.1.8
+# PROMETHEUS_IP=10.0.1.9
+# ALERTMANAGER_IP=10.0.1.10
+# NODEEXPORTER_IP=10.0.1.11
+# CADVISOR_IP=10.0.1.12
+# PUSHGATEWAY_IP=10.0.1.13
+# CADDY_IP=10.0.1.14
+
+
+CADDY_ADMIN_USER=jadmin
+CADDY_ADMIN_PASSWORD=f@st3rNOUmemoMAN
+
+PUID=${PUID}
+PGID=${PGID}
+TZ=${TZ}
+TZ=Europe/Bucharest
+
+
+################################################################################
+###
+### 15. Custom cms
+###
+################################################################################
+
+
+### PROJECT SETTINGS
+
+PROJECT_BASE_URL="http://brandlee.tk"
+PROJECT_NAME="brandli"
+
+DB_NAME='brandli'
+DB_USER='jadmin'
+DB_PASSWORD='f@st3rNOUmemoMAN'
+
+# Optionally, you can use a data source name (DSN)
+# When using a DSN, you can remove the DB_NAME, DB_USER, DB_PASSWORD, and DB_HOST variables
+# DATABASE_URL='mysql://database_user:database_password@database_host:database_port/database_name'
+
+DATABASE_URL='mysql://jadmin:f@st3rNOUmemoMAN@mysql:3306/brandli'
+
+#DB_HOST='172.16.238.11'
+
+
+# Optional variables
+# DB_HOST='localhost'
+# DB_PREFIX='wp_'
+
+WP_ENV='development'
+WP_HOME="http://brandlee.tk"
+WP_SITEURL="http://brandlee.tk/wp"
+WP_DEBUG_LOG=/path/to/debug.log
+
+
+
+# Generate your keys here: https://roots.io/salts.html
+AUTH_KEY='%sLC`QoV|Td3gHt!Jaq7M@{:f+$-P?bv_:H!4MBG-N8l&MZQb$rc:c4GS60]_?{>'
+SECURE_AUTH_KEY='zIu6jW}n4!_?S+lWp5bV/$B+wm=JR<s)J7EAihu8<o_CK7b}0!=-CCS8V|]E3I>'
+LOGGED_IN_KEY='h1P:cd#Uz8<q6dNL4b<E7*GZ@0WdGLkCgyd.t<0oh>>A]7:6NiT,Wk@hWG;BtP7r'
+NONCE_KEY='@}xvp*c*Yp#5hk4v:I1iJyGzU>DknKsFTg.Q=5fOUN&-#U]mC6f|EG?pZd#Y9;lh'
+AUTH_SALT='sg=USmbN*7A1jT{)fG2qH/wc!#PhHCyDY9n[R<R2E100`R!pbrh)8r.8QxRbk1dU'
+SECURE_AUTH_SALT='3SphYj:%-#0RJ8wqML7QW/LH5;.8l*^)uO[kLl3HrTn4xT)u0|cHf|xJG|$eO>'
+LOGGED_IN_SALT='<}AwMLg[/kKHe=->,rTBbcB/;M1k2JXZPBMuY:`Mrywko/H,0yr]L@=Tu6Zm+Rf>'
+NONCE_SALT=':=:xr/@@Zr^8Y,I2yo1=oz*r-`i/N<DmQS|-QSZ/l@OY?u[GEzM>zswa$J`D1>{*'
+
+
+### --- MARIADB ----
+
+# MARIADB_TAG=10.4-3.8.5
+# MARIADB_TAG=10.3-3.8.5
+# MARIADB_TAG=10.2-3.8.5
+# MARIADB_TAG=10.1-3.8.5
+
+### --- VANILLA WORDPRESS ----
+
+# WORDPRESS_TAG=5-4.24.0
+
+### --- PHP ----
+
+# Linux (uid 1000 gid 1000)
+
+# PHP_TAG=7.4-dev-4.16.0
+# PHP_TAG=7.3-dev-4.16.0
+# PHP_TAG=7.2-dev-4.16.0
+# PHP_TAG=7.4-dev-macos-4.16.0
+# PHP_TAG=7.3-dev-macos-4.16.0
+# PHP_TAG=7.2-dev-macos-4.16.0
+
+### --- NGINX ----
+
+# NGINX_TAG=1.19-5.10.2
+# NGINX_PAGESPEED_ENABLED=0
+# NGINX_MODSECURITY_ENABLED=0
+
+### --- REDIS ---
+
+# REDIS_TAG=latest
+# REDIS_TAG=6-3.4.1
+# REDIS_TAG=5-3.4.1
+# REDIS_TAG=6-3.4.1
+
+### --- NODE ---
+
+# NODE_TAG=14-dev-0.37.0
+# NODE_TAG=10-dev-0.36.0
+# NODE_TAG=8-dev-0.36.0
+
+### --- VARNISH ---
+
+# VARNISH_TAG=6.0-4.4.8
+# VARNISH_TAG=4.1-4.4.8
+
+### --- SOLR ---
+
+# SOLR_TAG=8-4.6.1
+# SOLR_TAG=7-4.6.1
+# SOLR_TAG=6-4.6.1
+# SOLR_TAG=5-4.6.1
+
+### --- ELASTICSEARCH ---
+
+# ELASTICSEARCH_TAG=7-5.6.0
+# ELASTICSEARCH_TAG=6-5.5.1
+
+### --- KIBANA ---
+
+# KIBANA_TAG=7-5.6.0
+# KIBANA_TAG=6-5.5.1
+
+### --- POSTGRESQL ----
+
+# POSTGRES_TAG=12-1.10.0
+# POSTGRES_TAG=11-1.10.0
+# POSTGRES_TAG=10-1.10.0
+# POSTGRES_TAG=9.6-1.10.0
+# POSTGRES_TAG=9.5-1.10.0
+# POSTGRES_TAG=9.4-1.10.0
+
+### OTHERS
+
+# ADMINER_TAG=4-3.10.1
+# APACHE_TAG=2.4-4.3.0
+# ATHENAPDF_TAG=2.10.0
+# MEMCACHED_TAG=1-2.6.0
+# OPENSMTPD_TAG=6.0-1.7.0
+# RSYSLOG_TAG=latest
+# WEBGRIND_TAG=1-1.16.1
+# XHPROF_TAG=2.3.1
+
+
+# NGINX_HOST=box.kubee.ga
+# NGINX_PORT=80
+
+# HA_HTTP_LOGIN=
+# HA_ALARM_CODE=
+# HA_HOME_LATITUDE=
+# HA_HOME_LONGITUDE=
+# HA_HOME_LATLON=
+# HA_HANNES_WORK_LATITUDE=
+# HA_HANNES_WORK_LONGITUDE=
+# HA_HANNES_WORK_LATLON=
+# HA_FORECAST_API=
+# HA_PUSHOVER_TOKEN=
+# HA_PUSHOVER_HANNES=
+# HA_PUSHOVER_BARBARA=
+# HA_PUSHOVER_BOTH=
+# HA_SLACK_APIKEY=
+# HA_ROUTER_USER=
+# HA_ROUTER_PASSWORD=
+# HA_LASTFM_APIKEY=
+# HA_HOMEMATIC_LOGIN=
+# HA_HOMEMATIC_PASSWORD=
+# HA_MQTT_LOGIN=
+# HA_MQTT_PASSWORD=
+# HA_RECORDER_DB=
+# HA_INFLUXDB_USER=
+# HA_INFLUXDB_PASSWORD=
+# HA_GOOGLE_API_KEY=    
+
+
+
